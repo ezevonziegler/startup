@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    
+    <title>Index</title>
+    
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/grid.css">
+
+    <script src="js/jquery-1.11.2.js"></script>
+  </head>
+  <body>
+  	
+    <header class="header">
+    	<h1>jQuery</h1>
+    </header> 
+
+    <section class="tweets">
+      <header>
+        <h2>Tweets</h2>
+      </header>
+      <article id="tweetList">
+      </article>  
+    </section>
+
+    <section id="main" hidden>
+      <p id="message">Hello World</p>
+	   </section>
+
+    <section>
+      <label>Enter your name:</label><br>
+      <input id="txtAlias" type="text" class="alias"><br>
+      <button id="btnResponse">Get Response</button>
+    </section>
+  
+    <script>
+      $( document ).ready(function() {
+        loadTweets();
+        $( "#main" ).show();
+        $( ".alias" ).focus();  
+      });
+
+      $("#btnResponse").click(function(){
+        var name = $("#txtAlias").val();
+        var url = "http://bootcamp.aws.af.cm/welcome/" + name.toString(); 
+        $.ajax( url, {
+          type: 'GET',
+          dataType: 'json',
+          success: function( resp ) {
+            $("#message").text( resp.response );
+            $("#message").css('color', '#555');
+            $("#message").highlight(name, "highlight");
+            $("#txtAlias").val("");
+          },
+          error: function( req, status, err ) {
+            $("#message").text( 'Something went wrong', status, err );
+            $("#message").css('color', 'red');
+          }
+        });
+      });
+
+      function loadTweets(){
+        var url = "http://localhost:3000/search?q=html5"; 
+        $.ajax( url, {
+          type: 'GET',
+          dataType: 'json',
+          success: function( resp ) {
+            var tweets = resp.statuses;
+            $.each( tweets, function( index, item ) {
+              var uName = item.user.name;
+              var created = item.created_at;
+              var tText = item.text;
+              var imgUrl = item.user.profile_image_url;
+
+              $( "#tweetList").append( "<img src=\""+ imgUrl+ "\"> "+ uName);
+              $( "#tweetList").append( "<p>"+ tText+ "</p>" );
+              $( "#tweetList").append( "<p class= \"date\">"+ created+ "</p>" );
+            });
+          },
+          error: function( req, status, err ) {
+          }
+        });
+      }
+
+      jQuery.fn.highlight = function (str, className) {
+    var regex = new RegExp(str, "gi");
+    return this.each(function () {
+        $(this).contents().filter(function() {
+            return this.nodeType == 3 && regex.test(this.nodeValue);
+        }).replaceWith(function() {
+            return (this.nodeValue || "").replace(regex, function(match) {
+                return "<span class=\"" + className + "\">" + match + "</span>";
+            });
+        });
+    });
+};
+
+    </script>
+  </body>
+</html>

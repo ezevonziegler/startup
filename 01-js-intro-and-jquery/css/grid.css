@@ -1,0 +1,104 @@
+
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html {
+  font: 100%/1.5 "Open Sans", sans-serif;
+  font-weight: 400;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (min-width: 40rem) {
+  html { font-size: 112%; }
+}
+
+@media (min-width: 64rem) {
+  html { font-size: 120%; }
+}
+
+body {
+  background-color: rgba(0,0,0,0.2);
+  color: #555;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 53rem;
+  width: 90%;
+}
+
+header {
+  background-color: #497bad;
+  text-align: center;
+}
+
+header h1 {
+  border: 3px solid #fff;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  color: #fff;
+  padding: .4rem .6rem;
+  display: inline-block;
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  margin: 1rem;
+}
+header h2 {
+  color: #fff;
+  }
+
+section {
+  border-top: 1px solid #eee;
+  text-align: center;
+
+  width: 70%;
+}
+
+
+h1, h2, h3, h4, h5 {
+  font-weight: 600;
+  margin: 0;
+}
+
+h1 {
+  font-size: 1.3rem;
+  line-height: 1.3em;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 40rem) {
+  h1 { font-size: 1.5rem; }
+}
+
+img {
+  height: auto;
+  width: 15%;
+  position: relative;
+}
+
+.content{
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.tweets{
+  background-color: #fff;
+  border: 3px solid #fff;
+  margin:1rem;
+  float:right;
+  width: 25%;
+}
+
+.date{
+  font-size: 0.8rem;
+}
+
+.highlight{
+  background-color: #ff2;
+}
