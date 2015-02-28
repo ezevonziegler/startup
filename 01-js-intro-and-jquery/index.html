@@ -38,8 +38,9 @@
     <script>
       $( document ).ready(function() {
         loadTweets();
-        $( "#main" ).show();
-        $( ".alias" ).focus();  
+        $( "#main" ).fadeIn(2000, function () {$( ".alias" ).focus()
+        });
+          
       });
 
       $("#btnResponse").click(function(){
