@@ -1,0 +1,69 @@
+<header>
+  		<img src=<%= basics.picture %> width="80" height="80" alt="Ezequiel von Ziegler">
+        <p><%= basics.name %></p>
+        <p>System Engineer Student</p>
+                            
+      	<dl>
+            <dt>
+                Location
+            </dt>
+            <dd>
+                <%= basics.location.region %>
+            </dd>
+            <dt>
+                Industry
+            </dt>
+            <dd>
+                <%= basics.industry %>
+            </dd>
+        </dl>
+  	</header>
+  	<section>
+  		<header>
+  			Overview
+  		</header>
+
+  		<dl>
+  			<dt>
+                Current
+            </dt>
+            <dd>
+                <ul>
+                    <li>
+                        Student
+                    </li>
+                </ul>
+            </dd>
+            <dt>
+                Education
+            </dt>
+            <dd>
+              <% _.each(education, function(education) { %> <li><%= education.institution %></li> <% }); %>
+            </dd>
+            <dt>
+                Languages
+            </dt>
+            <dd>
+                <% _.each(languages, function(languages) { %> <li><%= languages.language %></li> <% }); %>
+            </dd>
+        </dl>
+
+        <header>
+  			Summary
+  		</header>
+  		<p> <%=basics.summary%></p>
+
+        <header>
+            Experience
+        </header>
+
+         <% _.each(work, function(work) { %> <li><%= work.company %></li> <% }); %>
+
+  		<header>
+  			Skills
+  		</header>
+
+  		 <% _.each(skills, function(skills) { %> <li><%= skills.name %></li> <% }); %>
+
+         
+  	</section>

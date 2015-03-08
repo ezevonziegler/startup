@@ -1,0 +1,163 @@
+{
+  "basics": {
+    "name": "Ezequiel von Ziegler",
+    "picture": "https://media.licdn.com/mpr/mprx/0_yths_l6lusXytgqvpzi5_-BS2pPSt4qvYvqL_1XS1JbySyizrNrnDPK_Gt1PA0zMglGkuN9v0DcT",
+    "email": "ezevonziegler@gmail.com",
+    "phone": "",
+    "website": "",
+    "location": {
+      "address": "",
+      "postalCode": "",
+      "city": "Argentina",
+      "countryCode": "AR",
+      "region": "Cordoba"
+    },  
+    "industry": "Systems Engineer",
+    "summary": "I am a Information Systems Engineering student, I am a responsible and proactive person with problem solving aptitudes. I have capacity for teamwork, I am looking for contribute new ideas and efficient solutions to the tasks to develop."
+  },
+  "work": [
+    {
+      "company" : "Globant",
+      "since": "2015",
+      "to":""
+    },
+    {
+      "company" : "Intel",
+      "since": "2013",
+      "to":"2015"
+    }
+  ],
+  "education": [
+    {
+      "institution": "Universidad Tecnológica Nacional Facultad Regional Córdoba",
+      "studyType": "Ingeniería en Sistemas de Información",
+      "startDate": "2010-01-01",
+      "gpa": "",
+      "courses": [],
+      "endDate": "2015-01-01"
+    },
+    {
+      "institution": "Academia Boichenko",
+      "studyType": "Programa de Instrucción de Inglés",
+      "startDate": "2001-01-01",
+      "gpa": "",
+      "courses": [],
+      "endDate": "2009-01-01"
+    }
+  ],
+  "skills": [
+    {
+      "name": "Java",
+      "level": "",
+      "keywords": []
+    },
+    {
+      "name": "C#",
+      "level": "",
+      "keywords": []
+    },
+    {
+      "name": "ASP.NET",
+      "level": "",
+      "keywords": []
+    },
+    {
+      "name": "SQL",
+      "level": "",
+      "keywords": []
+    },
+    {
+      "name": "Microsoft SQL Server",
+      "level": "",
+      "keywords": []
+    },
+    {
+      "name": "MySQL",
+      "level": "",
+      "keywords": []
+    },
+    {
+      "name": "HTML",
+      "level": "",
+      "keywords": []
+    },
+    {
+      "name": "Bootstrap",
+      "level": "",
+      "keywords": []
+    },
+    {
+      "name": "JavaScript",
+      "level": "",
+      "keywords": []
+    },
+    {
+      "name": "jQuery",
+      "level": "",
+      "keywords": []
+    },
+    {
+      "name": "UML",
+      "level": "",
+      "keywords": []
+    },
+    {
+      "name": "Scrum",
+      "level": "",
+      "keywords": []
+    },
+    {
+      "name": "VB.NET",
+      "level": "",
+      "keywords": []
+    },
+    {
+      "name": "Git",
+      "level": "",
+      "keywords": []
+    },
+    {
+      "name": "HTML5",
+      "level": "",
+      "keywords": []
+    },
+    {
+      "name": "CSS",
+      "level": "",
+      "keywords": []
+    },
+    {
+      "name": "Visual Studio",
+      "level": "",
+      "keywords": []
+    },
+    {
+      "name": "NetBeans",
+      "level": "",
+      "keywords": []
+    },
+    {
+      "name": "Eclipse",
+      "level": "",
+      "keywords": []
+    },
+    {
+      "name": "JBoss EAP",
+      "level": "",
+      "keywords": []
+    }
+  ],
+  "references": [],
+  "languages": [
+    {
+      "language": "Español",
+      "fluency": ""
+    },
+    {
+      "language": "Inglés",
+      "fluency": ""
+    }
+  ],
+  "volunteer": []
+
+}

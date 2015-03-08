@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    
+    <title>Index</title>
+
+   	<script src="libs/jquery.js"></script>
+    <script src="libs/handlebars-v3.0.0.js"></script>
+    <script src="libs/underscore.js"></script>
+    <script src="libs/dust-full-0.3.0.js"></script>
+
+  	<script type="text/javascript">
+    
+    $.when(
+        $.ajax({
+            dataType: "json",
+            url: "libs/profile.json"
+        }),
+
+        $.ajax({
+            url:"dustTemplate.html"
+        })
+
+    ).done(function(data,html){
+        // render the template and data, append it to your target in the DOM
+        var template = dust.compile(html[0], "intro");
+        dust.loadSource(template);
+        dust.render("intro", data[0], function(err, out) {
+           $('#main').html(out);
+        });
+      });
+    
+  </script>
+
+
+  </head>
+  <body id="main">
+  
+  </body>
+</html>

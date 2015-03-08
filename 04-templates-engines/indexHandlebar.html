@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    
+    <title>Index</title>
+
+   	<script src="libs/jquery.js"></script>
+    <script src="libs/handlebars-v3.0.0.js"></script>
+    <script src="libs/underscore.js"></script>
+    <script src="libs/dust-core-0.3.0.min.js"></script>
+
+  	<script type="text/javascript">
+  	Handlebars.registerHelper('list', function(context, options) {
+	  var ret = "<ul>";
+	  
+	  for(var i=0, j=context.length; i<j; i++) {
+	    ret = ret + "<li>" + options.fn(context[i]) + "</li>";
+	  }
+	  return ret + "</ul>";
+	});
+
+    $.when(
+        $.ajax({
+            dataType: "json",
+            url: "libs/profile.json"
+        }),
+
+        $.ajax({
+            url:"handlebarTemplate.html"
+        })
+
+    ).done(function(data,html){
+        // render the template and data, append it to your target in the DOM
+        var template = Handlebars.compile(html[0]);
+        $(template(data[0])).appendTo("#main");
+        }
+    );
+  </script>
+
+
+  </head>
+  <body id="main">
+  
+  </body>
+</html>

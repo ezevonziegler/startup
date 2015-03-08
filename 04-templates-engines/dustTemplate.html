@@ -1,0 +1,71 @@
+<header>
+  		<img src={basics.picture} width="80" height="80" alt="Ezequiel von Ziegler">
+        <p>{basics.name}</p>
+        <p>System Engineer Student</p>
+                            
+      	<dl>
+            <dt>
+                Location
+            </dt>
+            <dd>
+                {basics.location.region}
+            </dd>
+            <dt>
+                Industry
+            </dt>
+            <dd>
+                {basics.industry}
+            </dd>
+        </dl>
+  	</header>
+  	<section>
+  		<header>
+  			Overview
+  		</header>
+
+  		<dl>
+  			<dt>
+                Current
+            </dt>
+            <dd>
+                <ul>
+                    <li>
+                        Student
+                    </li>
+                </ul>
+            </dd>
+            <dt>
+                Education
+            </dt>
+            <dd>
+               {#education}
+               <li>{institution}</li>{~n}
+               {/education}
+            </dd>
+            <dt>
+                Languajes
+            </dt>
+            <dd>
+                {#languages}<li>{language}</li>{~n}{/languages}
+            </dd>
+        </dl>
+
+        <header>
+  			Summary
+  		</header>
+  		<p> {basics.summary}</p>
+
+        <header>
+            Experience
+        </header>
+
+         {#work}<li>{company}</li>{~n}{/work}
+
+  		<header>
+  			Skills
+  		</header>
+
+  		 {#skills}<li>{name}</li>{~n}{/skills}
+
+         
+  	</section>
