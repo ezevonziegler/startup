@@ -12,25 +12,27 @@
     <script src="libs/dust-full-0.3.0.js"></script>
 
   	<script type="text/javascript">
-    
-    $.when(
-        $.ajax({
-            dataType: "json",
-            url: "libs/profile.json"
-        }),
 
-        $.ajax({
-            url:"dustTemplate.html"
-        })
+    $(document).ready(function(){
+      $.when(
+          $.ajax({
+              dataType: "json",
+              url: "libs/profile.json"
+          }),
 
-    ).done(function(data,html){
-        // render the template and data, append it to your target in the DOM
-        var template = dust.compile(html[0], "intro");
-        dust.loadSource(template);
-        dust.render("intro", data[0], function(err, out) {
-           $('#main').html(out);
+          $.ajax({
+              url:"dustTemplate.html"
+          })
+
+      ).done(function(data,html){
+          // render the template and data, append it to your target in the DOM
+          var template = dust.compile(html[0], "intro");
+          dust.loadSource(template);
+          dust.render("intro", data[0], function(err, out) {
+             $('#main').html(out);
+          });
         });
-      });
+    });
     
   </script>
 

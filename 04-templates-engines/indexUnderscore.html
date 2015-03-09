@@ -13,22 +13,24 @@
 
   	<script type="text/javascript">
 
-    $.when(
-        $.ajax({
-            dataType: "json",
-            url: "libs/profile.json"
-        }),
+    $(document).ready(function(){
+      $.when(
+          $.ajax({
+              dataType: "json",
+              url: "libs/profile.json"
+          }),
 
-        $.ajax({
-            url:"underscoreTemplate.html"
-        })
+          $.ajax({
+              url:"underscoreTemplate.html"
+          })
 
-    ).done(function(data,html){
-        // render the template and data, append it to your target in the DOM
-        var template = _.template(html[0]);
-        $(template(data[0])).appendTo("#main");
-        }
-    );
+      ).done(function(data,html){
+          // render the template and data, append it to your target in the DOM
+          var template = _.template(html[0]);
+          $(template(data[0])).appendTo("#main");
+          }
+      );
+    });
   </script>
 
 

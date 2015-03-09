@@ -19,24 +19,26 @@
 	    ret = ret + "<li>" + options.fn(context[i]) + "</li>";
 	  }
 	  return ret + "</ul>";
-	});
+	   });
 
-    $.when(
-        $.ajax({
-            dataType: "json",
-            url: "libs/profile.json"
-        }),
+    $(document).ready(function(){
+      $.when(
+          $.ajax({
+              dataType: "json",
+              url: "libs/profile.json"
+          }),
 
-        $.ajax({
-            url:"handlebarTemplate.html"
-        })
+          $.ajax({
+              url:"handlebarTemplate.html"
+          })
 
-    ).done(function(data,html){
-        // render the template and data, append it to your target in the DOM
-        var template = Handlebars.compile(html[0]);
-        $(template(data[0])).appendTo("#main");
-        }
-    );
+      ).done(function(data,html){
+          // render the template and data, append it to your target in the DOM
+          var template = Handlebars.compile(html[0]);
+          $(template(data[0])).appendTo("#main");
+          }
+      );
+    });
   </script>
 
 
