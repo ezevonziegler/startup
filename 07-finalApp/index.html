@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <title>MyPlaylists</title>
+
+    <script data-main="res/js/app" src="res/js/libs/require.js"></script>
+
+
+
+    <link rel="stylesheet" type="text/css" href="res/css/style.css">
+    <link rel="stylesheet" href="res/css/jquery.modal.css" type="text/css" media="screen" />
+  </head>
+  <body id="playlistsapp">
+  	<header>
+  		<h1> Final App</h1>
+  	</header>
+    <section id="logged">
+      Logged as: <label id="user"></label>
+    </section>
+    <section id="login">
+
+      <p>Log in with your Spotify account</p>
+      <input type="button" id="btnLogin" value="Login"/>
+    </section>
+
+    <section id="main">
+      <select id="selectPlaylist"></select><br>
+      <p>Tracks on this playlist:</p><br>
+      <ul id="playlistTracks">
+      </ul>
+
+      <input type="text" id="searchText" />
+      <input type="button" id="search" value="Search" />
+      <ul id="tracks">
+      </ul>
+
+      <input type="button" id="addToPlaylist" value="Add to Playlist" />
+      <input type="button" id="listenPlaylist" value="Listen Playlist" />
+      <input type="button" id="newPlaylist" value="New Playlist" />
+    </section>
+
+    <form id="newForm" class="modal">
+      <input type="text" id="playlistName" /><br>
+      <input type="button" id="savePlaylist" value="OK" />
+      <input type="button" id="cancelPlaylist" value="Cancel" />
+    </form>
+
+    <script id="track-template" type="text/x-handlebars-template">
+      <div class="view">
+        <input class="toggle" type="checkbox" {{#if checked}} checked="checked"{{/if}} />
+        <label>{{name}}</label>
+      </div>
+    </script>
+
+    <script id="playlist-track-template" type="text/x-handlebars-template">
+      <div class="view">
+        <label>{{name}}</label>
+      </div>
+    </script>
+
+    <script id="playlist-template" type="text/x-handlebars-template">
+      <div value={{id}}>{{name}}</div>
+    </script>
+
+  </body>
+</html>
