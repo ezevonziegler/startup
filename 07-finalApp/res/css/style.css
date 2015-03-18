@@ -1,190 +1,206 @@
 /*-------------------------
-	Simple reset
+  Simple reset
 --------------------------*/
 
 
 *{
-	margin:0;
-	padding:0;
+  margin:0;
+  padding:0;
 }
 
 
 /*-------------------------
-	General Styles
+  General Styles
 --------------------------*/
 
 
 html{
-	background-color:#edf0f4;
+  background-color:#121314;
 }
 
 body{
-	font:15px/1.3 Arial, sans-serif;
-	color: #4f4f4f;
+  font:15px/1.3;
+  font-family: 'Open Sans', sans-serif;
+  color: #dfe0e6;
 }
 
 a, a:visited {
-	outline:none;
-	color:#389dc1;
+  outline:none;
+  color:#389dc1;
 }
 
 a:hover{
-	text-decoration:none;
+  text-decoration:none;
 }
 
 section, footer, header, aside{
-	display: block;
+  display: block;
 }
 
 
 /*----------------------------
-	The main content element
+  The main content element
 -----------------------------*/
 
+header{
+  height: 80px;
+  text-align: center;
+  background-color: rgba(0,0,0,0.75);
+}
 
-#moviesapp{
-	padding:100px;
-	background-color:#fff;
-	box-shadow:0 0 1px #ccc;
-	width:700px;
-	margin:50px auto;
-	border-radius:6px;
-	font:bold 24px/1 'PT Sans', sans-serif;
-	color:#6b6b6b;
+#logo{
+  font:inherit;
+  font-size:30px;
+  border-style: solid;
+  border-width: 6px;
+  background: #6F9E00;
+  border-color: #ffffff;
+  color:#fff;
+  text-transform:uppercase;
+  margin:10px 10px 10px 200px;
+  text-align:center;
+  padding:10px;
+  border-radius: 20px;
+  float: left;
+  letter-spacing: -5px;
+  font-weight: 600;
+}
+
+#title {
+  float: left;
+  font-size:30px;
+  padding-top: 25px;
+  font-weight: 600;
+}
+
+#app{
+  padding:60px;
+  width:1000px;
+  margin:0px auto;
+}
+
+#logged{
+  margin:10px 200px 10px 10px;
+  float: right;
 }
 
 
-#moviesapp h1{
-	font-size:36px;
-	text-align: center;
-	text-transform: uppercase;
-	padding: 0 0 20px;
+#playlistsapp h1{
+  font-size:36px;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 0 0 20px;
 
 }
 
-#moviesapp input[type="text"] {
-	width: 466px;
-	font-size: 24px;
-	font-family: inherit;
-	line-height: 1.4em;
-	border: 0;
-	margin-bottom: 10px;
-	outline: none;
-	padding: 6px;
-	border: 1px solid #999999;
-	-webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
-	-moz-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
-	-ms-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
-	-o-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
-	box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
+#playlistsapp input[type="text"] {
+  width: 200px;
+  font-size: 15px;
+  font-family: inherit;
+  line-height: 1.4em;
+  border: 0;
+  margin-bottom: 10px;
+  outline: none;
+  padding: 6px 15px;
+  border: 1px solid #999999;
+  border-radius: 37px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
+  -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
+  -ms-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
+  -o-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
 }
 
-#new{
-	padding:20px;
-	background-color:#EAEAEB;
-	box-shadow:0 0 1px #ccc;
-	width:700px;
-	margin:15px auto;
-	border-radius:6px;
-	font:bold 24px/1 'PT Sans', sans-serif;
-	color:#6b6b6b;
+#playlistsapp select{
+  width: 200px;
+  font-size: 15px;
+  font-family: inherit;
+  line-height: 1.4em;
+  border: 0;
+  margin-bottom: 10px;
+  outline: none;
+  padding: 6px 15px;
+  border: 1px solid #999999;
+  border-radius: 37px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
+  -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
+  -ms-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
+  -o-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
 }
 
-#movies{
-	list-style:none;
-	margin:0 auto;
-	width:600px;
+#playlistsapp input[type="button"] {
+  font:inherit;
+  font-size:12px;
+  cursor:pointer;
+  border:none;
+  background: #648f00;
+  border-color: #648f00;
+  color:#fff;
+  text-transform:uppercase;
+  width:auto;
+  margin:5px 5px;
+  text-align:center;
+  padding:10px 25px;
+  border-radius: 37px;
 }
 
-#movies li{
-	background-color: #EAEAEB;
-	box-shadow:0 1px 1px #eee;
-	font-size:22px;
-	color: #85898b;
-	padding:22px 30px;
-	margin-bottom:15px;
-	border-radius:4px;
-	cursor:pointer;
+#playlistsapp input[type="button"]:disabled{
+  background: #A4A4A4;
+  cursor:default;
 }
 
-#movies li span{
-	float:right;
-	opacity:0.6;
+#login {
+  text-align: center;
 }
 
-#movies li input[type=button]{
-	font:inherit;
-	font-size:22px;
-	cursor:pointer;
-	border:none;
-	float:right;
-	background-color:#89bde5;
-	color:#fff;
-	text-transform:uppercase;
-	width:auto;
-	margin:5px;
-	text-align:center;
-	padding:5px 0;
-	border-radius: 3px;
-	box-shadow:0 1px 1px #ddd, 0 0 20px #84b8e0 inset;
+#trackSection {
+  float: left;
+  position: relative;
 }
 
-#movies li.done label {
-	color: #777777;
-	text-decoration: line-through;
+#playlistSection {
+  float: right;
+  position: relative;
 }
 
-#movies .back {
-	position: relative;
-	vertical-align: middle;
-	float: right;
-	right: 5px;
-	cursor: pointer;
-	width: 20px;
-	height: 20px;
-	background: url(../img/back.png) no-repeat;
+#trackSection, #playlistSection {
+  width: 470px;
+  padding:10px;
+  background-color: #1c1c1f;
 }
 
-#movies li:hover .destroy {
-  	display: block;
+#playlistSection h4{
+  padding:10px;
+  margin-bottom:10px;
+  border-radius:4px;
+  cursor:pointer;
+  border-bottom: 1px solid #222326;
 }
 
-#movies .destroy:hover {
-  	background-position: 0 -20px;
+#playlistTracks, #tracks{
+  list-style:none;
+  margin:0 auto;
 }
 
-#movies li.editing {
-	border-bottom: none;
-	margin-top: -1px;
-	padding: 0;
+#playlistTracks li, #tracks li {
+  font-size:15px;
+  padding:10px;
+  border-radius:4px;
+  cursor:pointer;
+  border-bottom: 1px solid #222326;
 }
 
-#movies li.editing:last-child {
-	margin-bottom: -1px;
+#tracks li:hover {
+  background-color: #222326;
 }
 
-#movies li.editing .edit {
-	display: block;
-	width: 444px;
-	padding: 13px 15px 14px 20px;
-	margin: 0;
+#tracks li.checked {
+  background-color: #222326;
 }
 
-#movies li.editing .view {
-	display: none;
+#playlistSection label {
+  margin: 20px;
+  text-align: center;
 }
 
-#movies li .view label {
-	word-break: break-word;
-}
-
-#movies li .edit {
-	display: none;
-}
-
-#instructions {
-	margin: 10px auto;
-	color: #777777;
-	text-shadow: rgba(255, 255, 255, 0.8) 0 1px 0;
-	text-align: center;
-}

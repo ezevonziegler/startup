@@ -1,11 +1,11 @@
-define(["jquery", "./main"], function($, main) {
+define(["jquery", "./utils"], function($, utils) {
     return{
 
         getProfile: function(callback){
           $.ajax({
                     url: 'https://api.spotify.com/v1/me',
                     headers: {
-                        'Authorization': 'Bearer ' + main.getAccessToken()
+                        'Authorization': 'Bearer ' + utils.getAccessToken()
                       },
 
                     success: function (response) {
@@ -17,9 +17,9 @@ define(["jquery", "./main"], function($, main) {
 
         getPlaylists: function(callback){
          $.ajax({
-              url: "https://api.spotify.com/v1/users/" + localStorage.getItem("userId") +"/playlists",
+              url: "https://api.spotify.com/v1/users/" + utils.getUserId() +"/playlists",
               headers: {
-                  'Authorization': 'Bearer ' + main.getAccessToken()
+                  'Authorization': 'Bearer ' + utils.getAccessToken()
                 },
 
               success: function (response) {
@@ -32,7 +32,7 @@ define(["jquery", "./main"], function($, main) {
         createPlaylist: function(callback){
           $.ajax({
 
-              url: "https://api.spotify.com/v1/users/"+ localStorage.getItem("userId") +"/playlists",
+              url: "https://api.spotify.com/v1/users/"+ utils.getUserId() +"/playlists",
               type: 'POST',
               dataType: 'json',
               data:JSON.stringify({
@@ -40,7 +40,7 @@ define(["jquery", "./main"], function($, main) {
               }),
               headers:
               {
-                  'Authorization': 'Bearer ' + main.getAccessToken(),
+                  'Authorization': 'Bearer ' + utils.getAccessToken(),
                   'Content-Type': 'application/json'
               },
               success: function (response) {
@@ -55,7 +55,13 @@ define(["jquery", "./main"], function($, main) {
                 data: {
                     q: $("#searchText").val(),
                     type: 'track',
-                    limit: '10'
+                    limit: '10',
+                    market: 'from_token'
+                },
+                headers:
+                {
+                    'Authorization': 'Bearer ' + utils.getAccessToken(),
+                    'Content-Type': 'application/json'
                 },
                 success: function (response) {
                    callback(response);
@@ -66,7 +72,7 @@ define(["jquery", "./main"], function($, main) {
         addTracks: function(id, uris){
 
           $.ajax({
-                      url: "https://api.spotify.com/v1/users/"+ localStorage.getItem("userId") +"/playlists/"+ id +"/tracks",
+                      url: "https://api.spotify.com/v1/users/"+ utils.getUserId() +"/playlists/"+ id +"/tracks",
                       type: 'POST',
                       dataType: 'json',
                       data:JSON.stringify({
@@ -74,7 +80,7 @@ define(["jquery", "./main"], function($, main) {
                     }),
                       headers:
                       {
-                          'Authorization': 'Bearer ' + main.getAccessToken(),
+                          'Authorization': 'Bearer ' + utils.getAccessToken(),
                           'Content-Type': 'application/json'
                       },
                       success: function (response) {
@@ -85,11 +91,11 @@ define(["jquery", "./main"], function($, main) {
 
         getPlaylistTracks: function(id, callback){
            $.ajax({
-                      url: "https://api.spotify.com/v1/users/"+ localStorage.getItem("userId") +"/playlists/"+ id +"/tracks",
+                      url: "https://api.spotify.com/v1/users/"+ utils.getUserId() +"/playlists/"+ id +"/tracks",
                       type: 'GET',
                       headers:
                       {
-                          'Authorization': 'Bearer ' + main.getAccessToken(),
+                          'Authorization': 'Bearer ' + utils.getAccessToken(),
                           'Content-Type': 'application/json'
                       },
                       success: function (response) {

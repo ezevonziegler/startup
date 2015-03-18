@@ -1,4 +1,4 @@
-define(["jquery", "handlebars-v3.0.0", "backbone", "backbone.localStorage", "./main", "./data", "jquery.modal" ], function($, Handlebars, Backbone, LocalStorage, main, data, modal) {
+define(["jquery", "handlebars-v3.0.0", "backbone", "backbone.localStorage", "./utils", "./data", "jquery.modal" ], function($, Handlebars, Backbone, LocalStorage, utils, data, modal) {
 
     $(function(){
 
@@ -8,8 +8,10 @@ define(["jquery", "handlebars-v3.0.0", "backbone", "backbone.localStorage", "./m
 
             defaults:{
                 name: "Track Name",
+                artist: "Track Artist",
                 id: "Track id",
                 uri: "Track uri",
+                preview: "Track preview",
                 checked: false
             },
 
@@ -46,7 +48,7 @@ define(["jquery", "handlebars-v3.0.0", "backbone", "backbone.localStorage", "./m
             initialize: function(){
 
                 this.listenTo(this.model, 'change', this.render);
-                //this.listenTo(this.model, 'destroy', this.remove);
+                this.listenTo(this.model, 'destroy', this.remove);
             },
 
             render: function(){
@@ -58,6 +60,8 @@ define(["jquery", "handlebars-v3.0.0", "backbone", "backbone.localStorage", "./m
 
             toggleChecked: function() {
                 this.model.toggle();
+                this.$el.toggleClass("checked");
+                $("#addToPlaylist").attr("disabled", !$("#tracks input[type='checkbox']").is(":checked"));
             }
         });
 
@@ -71,7 +75,7 @@ define(["jquery", "handlebars-v3.0.0", "backbone", "backbone.localStorage", "./m
             initialize: function(){
 
                 this.listenTo(this.model, 'change', this.render);
-                //this.listenTo(this.model, 'destroy', this.remove);
+                this.listenTo(this.model, 'destroy', this.remove);
             },
 
             render: function(){
@@ -123,7 +127,7 @@ define(["jquery", "handlebars-v3.0.0", "backbone", "backbone.localStorage", "./m
             initialize: function(){
 
                 this.listenTo(this.model, 'change', this.render);
-                //this.listenTo(this.model, 'destroy', this.remove);
+                this.listenTo(this.model, 'destroy', this.remove);
             },
 
             render: function(){
@@ -200,15 +204,21 @@ define(["jquery", "handlebars-v3.0.0", "backbone", "backbone.localStorage", "./m
                             if (response.items.length) {
                                 response.items.forEach(function(track, index){
 
-                                    PlaylistTracks.create({ name: track.track.name, id: track.track.id, uri: track.track.uri});
+                                    PlaylistTracks.create({ name: track.track.name, id: track.track.id, uri: track.track.uri, preview: track.track.preview_url, artist: track.track.artists[0].name});
                                 });
+                                $("#stopPlaylist").prop('disabled', true);
+                                $("#nextPlaylist").prop('disabled', true);
+                            }
+                            else{
+                                $("#mediaButtons input").prop('disabled', true);
+                                $("#info").text("There´s no tracks in this playlist yet");
                             }
                         });
                     }
                 }
 
 
-                if(main.getAccessToken() != null)
+                if(utils.getAccessToken() != null)
                 {
                     loadProfile(function(){
                         loadPlaylists(function(){
@@ -247,8 +257,9 @@ define(["jquery", "handlebars-v3.0.0", "backbone", "backbone.localStorage", "./m
 
             performSearch: function(){
 
-                _.invoke(Tracks.getAll(), 'destroy');
-                $("#tracks").empty();
+                _.each(_.clone(Tracks.models), function(model) {
+                    model.destroy();
+                });
 
                 if (!$("#searchText").val()) return;
 
@@ -256,9 +267,12 @@ define(["jquery", "handlebars-v3.0.0", "backbone", "backbone.localStorage", "./m
                      if (response.tracks.items.length) {
                         response.tracks.items.forEach(function(track, index){
 
-                            Tracks.create({ name: track.name, id: track.id, uri: track.uri});
-
+                            Tracks.create({ name: track.name, id: track.id, uri: track.uri, preview: track.preview_url, artist: track.artists[0].name});
+                            $("#searchInfo").text("");
                         });
+                    }
+                    else{
+                        $("#searchInfo").text("Sorry, there's no tracks available");
                     }
                 });
 
@@ -266,8 +280,9 @@ define(["jquery", "handlebars-v3.0.0", "backbone", "backbone.localStorage", "./m
 
             performSearchOnEnter: function(e){
                 if (e.keyCode != 13) return;
-                $("#search").click();
+                this.performSearch();
             },
+
 
             newPlaylist: function(){
                 $("#newForm").modal();
@@ -275,12 +290,36 @@ define(["jquery", "handlebars-v3.0.0", "backbone", "backbone.localStorage", "./m
 
             savePlaylist: function(){
                 if (!$("#playlistName").val()) return;
-                data.createPlaylist(function(response){
-                    Playlists.create({ name: response.name, id: response.id, uri: response.uri});
+                function save(callback){
+                    data.createPlaylist(function(response){
+                        Playlists.create({ name: response.name, id: response.id, uri: response.uri});
 
-                    $.modal.close();
-                    $("#playlistName").val("");
+                        $.modal.close();
+                        $("#playlistName").val("");
+                        callback();
+                    });
+                }
+
+                function refreshPlaylists() {
+                    _.each(_.clone(Playlists.models), function(model) {
+                        model.destroy();
+                    });
+
+                    data.getPlaylists(function(response) {
+                        if (response.items.length > 0) {
+                            response.items.forEach(function(playlist, index){
+
+                                Playlists.create({ name: playlist.name, id: playlist.id, uri: playlist.uri});
+                            });
+                        }
+                    });
+                }
+
+                save(function(){
+                    refreshPlaylists();
                 });
+
+                this.selectPlaylist();
             },
 
             cancelPlaylist: function(){
@@ -300,26 +339,88 @@ define(["jquery", "handlebars-v3.0.0", "backbone", "backbone.localStorage", "./m
 
                 data.addTracks(id, uris);
 
-                //_.invoke(Tracks.getAll(), 'destroy');
-                //$("#tracks").empty();
+                _.each(_.clone(Tracks.models), function(model) {
+                    model.destroy();
+                });
 
+                $("#searchText").val("");
+                $("#addToPlaylist").prop('disabled', true);
+
+                this.selectPlaylist();
             },
 
             selectPlaylist: function(){
-                _.invoke(Tracks.getAll(), 'destroy');
-                $("#playlistTracks").empty();
+                 _.each(_.clone(PlaylistTracks.models), function(model) {
+                    model.destroy();
+                });
 
                 var id = $('#selectPlaylist option:selected div').attr("value");
 
                 data.getPlaylistTracks(id, function(response){
-                     if (response.items.length) {
+                     if (response.items.length > 0) {
                         response.items.forEach(function(track, index){
 
-                            PlaylistTracks.create({ name: track.track.name, id: track.track.id, uri: track.track.uri});
+                            PlaylistTracks.create({ name: track.track.name, id: track.track.id, uri: track.track.uri, preview: track.track.preview_url, artist: track.track.artists[0].name});
 
                         });
+                        $("#info").text("");
+                        $("#listenPlaylist").prop('disabled', false);
+                    }
+                    else
+                    {
+                        $("#mediaButtons input").prop('disabled', true);
+                        $("#info").text("There´s no tracks in this playlist yet");
                     }
                 });
+            },
+
+            listenPlaylist: function(){
+
+                $("#listenPlaylist").prop('disabled', true);
+                $("#stopPlaylist").prop('disabled', false);
+                $("#nextPlaylist").prop('disabled', false);
+
+                var audio;
+                var x = 0;
+                function loop(arr) {
+                    play(arr[x],function(){
+
+                        x++;
+
+                        if(x == (arr.length - 2)) {
+                            $("#nextPlaylist").prop('disabled', true);
+                        }
+
+                        if(x < arr.length) {
+                            loop(arr);
+                        }
+                    });
+                }
+
+                function play(item,callback) {
+                    audio = new Audio(item.attributes.preview);
+                    audio.play();
+
+                    audio.addEventListener('ended', function () {
+                        callback();
+                    });
+
+                    $("#nextPlaylist").click(function(){
+                        audio.pause();
+                        callback();
+                    });
+
+                    $("#stopPlaylist").click(function(){
+                        audio.pause();
+                        x = PlaylistTracks.models.length;
+                        $("#listenPlaylist").prop('disabled', false);
+                        $("#nextPlaylist").prop('disabled', true);
+                        $("#stopPlaylist").prop('disabled', true);
+                        callback();
+                    });
+                }
+
+                loop(PlaylistTracks.models);
             }
         });
 

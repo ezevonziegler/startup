@@ -40,6 +40,7 @@ define(["jquery", "handlebars-v3.0.0"], function($, Handlebars) {
         }
 
         $( "#main" ).hide();
+        $( "#logged" ).hide();
 
         $( "#btnLogin" ).click(function() {
             login();
@@ -48,15 +49,10 @@ define(["jquery", "handlebars-v3.0.0"], function($, Handlebars) {
         if($.urlParam("access_token") != null)
         {
             localStorage.setItem('access_token', $.urlParam("access_token"));
+            $( "#logged" ).show();
             $( "#main" ).show();
             $( "#login" ).hide();
         }
 
     })();
-
-     return {
-          getAccessToken: function(){
-          return  localStorage.getItem('access_token');
-        }
-      }
 });

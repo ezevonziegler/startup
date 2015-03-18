@@ -15,32 +15,51 @@
   </head>
   <body id="playlistsapp">
   	<header>
-  		<h1> Final App</h1>
-  	</header>
-    <section id="logged">
+  		<label id="logo">MP</label>
+      <label id="title">My Playlists</label>
+
+    <div id="logged">
       Logged as: <label id="user"></label>
-    </section>
-    <section id="login">
+    </div>
 
-      <p>Log in with your Spotify account</p>
-      <input type="button" id="btnLogin" value="Login"/>
-    </section>
+    </header>
 
-    <section id="main">
-      <select id="selectPlaylist"></select><br>
-      <p>Tracks on this playlist:</p><br>
-      <ul id="playlistTracks">
-      </ul>
+    <div id="app">
+      <section id="login">
+        <p>Log in with your Spotify account</p>
+        <input type="button" id="btnLogin" value="Login"/>
+      </section>
 
-      <input type="text" id="searchText" />
-      <input type="button" id="search" value="Search" />
-      <ul id="tracks">
-      </ul>
+      <section id="main">
 
-      <input type="button" id="addToPlaylist" value="Add to Playlist" />
-      <input type="button" id="listenPlaylist" value="Listen Playlist" />
-      <input type="button" id="newPlaylist" value="New Playlist" />
-    </section>
+        <div id="trackSection">
+          <h3>Tracks</h3>
+          <input type="text" id="searchText" placeholder="Track Name"/>
+          <input type="button" id="search" value="Search" />
+          <ul id="tracks">
+          </ul>
+          <label id="searchInfo"></label><br>
+          <input type="button" id="addToPlaylist" value="Add to Playlist" disabled/>
+        </div>
+
+        <div id="playlistSection">
+          <h3>My Playlists</h3>
+          <select id="selectPlaylist"></select>
+          <input type="button" id="newPlaylist" value="New Playlist" />
+          <br>
+          <h4>Tracks on this playlist:</h4>
+          <ul id="playlistTracks">
+          </ul>
+          <label id="info"></label><br>
+          <div id="mediaButtons">
+            <input type="button" id="listenPlaylist" value="Listen Playlist" />
+            <input type="button" id="stopPlaylist" value="Stop" />
+            <input type="button" id="nextPlaylist" value="Next" />
+          </div>
+        </div>
+
+      </section>
+    </div>
 
     <form id="newForm" class="modal">
       <input type="text" id="playlistName" /><br>
@@ -51,13 +70,13 @@
     <script id="track-template" type="text/x-handlebars-template">
       <div class="view">
         <input class="toggle" type="checkbox" {{#if checked}} checked="checked"{{/if}} />
-        <label>{{name}}</label>
+        <label>{{name}} - {{artist}}</label>
       </div>
     </script>
 
     <script id="playlist-track-template" type="text/x-handlebars-template">
       <div class="view">
-        <label>{{name}}</label>
+        <label>{{name}} - {{artist}}</label>
       </div>
     </script>
 
